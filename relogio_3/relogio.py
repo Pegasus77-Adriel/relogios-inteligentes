@@ -13,14 +13,14 @@ def executar_relogio():
     fator_atraso = 10000000 
     # Configurando o servidor UDP
     socket_servidor = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    socket_servidor.bind((host, 12348))
+    socket_servidor.bind((host, 12346))
     socket_servidor.settimeout(1)  # Timeout de 1 segundo para o recvfrom
 
     endereco_cliente = None
     maior_horario = None  # Para armazenar o maior horário recebido
 
     # Configurando os endereços dos outros servidores para sincronização
-    outros_servidores = [(host, 12346), (host, 12347)]  # Adicione outros servidores conforme necessário
+    outros_servidores = [('172.16.103.6', 12346), ('172.16.103.7', 12346)]  # Adicione outros servidores conforme necessário
 
     def enviar_horario():
         while True:
