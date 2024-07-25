@@ -3,6 +3,8 @@ import itertools
 import threading
 import time
 
+# Cada relogio é um cliente e servidor ao mesmo tempo
+
 def executar_relogio():
     # Inicializando horas, minutos e segundos
     horas = 0
@@ -20,7 +22,7 @@ def executar_relogio():
     maior_horario = None  # Para armazenar o maior horário recebido
 
     # Configurando os endereços dos outros servidores para sincronização
-    outros_servidores = [(host, 12347), (host, 12348)]  # Adicione outros servidores conforme necessário
+    outros_servidores = [(host, 12347), (host, 12348)] #
 
     def enviar_horario():
         while True:
@@ -30,7 +32,7 @@ def executar_relogio():
                     socket_servidor.sendto(mensagem_horario.encode(), servidor)
                 except Exception as e:
                     pass
-            time.sleep(0.2)  # Envia o horário a cada 0,5 segundos
+            time.sleep(0.2)  # Envia o horário a cada 0,2 segundos
 
     threading.Thread(target=enviar_horario, daemon=True).start()
 
@@ -97,14 +99,14 @@ def executar_relogio():
                 minutos = novo_minutos
                 segundos = novo_segundos
 
-            time.sleep(0.5)  # Ajusta a cada segundo
+            time.sleep(0.5)  # Ajusta a cada meio segundo
 
     # Inicia a thread para ajustar o relógio em paralelo
     threading.Thread(target=ajustar_relogio_com_base_na_latencia_e_maior_horario, daemon=True).start()
 
     resp = False
     while(resp == False):
-        
+         # Menu inicial da tela
         menu = input("Digite o atraso do incremento do relógio níveis ('1', '2', '3', '4', '5'):")
         
         if(menu == "3"):
@@ -135,7 +137,7 @@ def executar_relogio():
                 horas += 1
                 if horas == 24:
                     horas = 0
-        
+        # printandop o horário na tela
         print("\033c", end="")
         print(f"Horário:{horas:02}:{minutos:02}:{segundos:02}")
 
